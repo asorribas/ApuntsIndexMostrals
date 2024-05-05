@@ -1,0 +1,107 @@
+---
+title: "Sample statistics"
+output: 
+  html_document:
+    css: "www/LlibreBST.css"
+    toc: true
+    toc_float:
+      toc_collapsed: true
+    toc_depth: 3
+    number_sections: true
+    # theme: united
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T, message=FALSE, comment='',warning = FALSE)
+```
+
+# Introduction
+
+```{r echo=T}
+library(tidyverse)
+library(rmarkdown)
+library(summarytools)
+ 
+```
+
+# Basic Exploratory Data Analysis
+
+## Data: Chicken Weights by Feed Type
+
+An experiment was conducted to measure and compare the effectiveness of various feed supplements on the growth rate of chickens. Results are in a data frame **chickwts** with two variables:
+
+- weight: a numeric variable giving the chick weight.
+- feed: a factor giving the feed type.
+
+```{r}
+data(chickwts)
+chickwts %>% paged_table()
+```
+
+## Compute basic statistics
+
+```{r}
+chickwts %>% 
+  group_by(feed) %>%
+  descr(weight) 
+```
+
+```{r}
+chickwts %>% 
+  group_by(feed) %>%
+  descr(weight,stats = "common") %>%
+  tb() %>%
+  select(-variable) %>%
+  knitr::kable()
+```
+
+
+```{r}
+chickwts %>% 
+  group_by(feed) %>% 
+  summarise(Mean=round(mean(weight),1),sd=round(sd(weight),1),N=n()) %>% 
+  knitr::kable()
+```
+
+
+```{r}
+ggplot(chickwts,aes(feed,weight,fill=feed))+
+  geom_boxplot()
+```
+
+
+```{r}
+ggplot(chickwts,aes(feed,weight,fill=feed))+
+  geom_boxplot() +
+  coord_flip()
+```
+
+```{r}
+ggplot(chickwts,aes(feed,weight,color=feed))+
+  stat_summary(fun.data=mean_cl_normal)
+```
+
+```{r}
+ggplot(chickwts,aes(weight,fill=feed))+
+  geom_histogram(binwidth = 50,color='black')+
+  facet_wrap(.~feed)
+```
+
+
+```{r}
+ggplot(chickwts,aes(weight))+
+  geom_histogram(aes(y=..density..,,fill=feed),
+                 binwidth = 50,color='black')+
+  geom_density()+
+  facet_wrap(.~feed)
+```
+
+
+
+
+
+
+
+# Compute some statistics
+

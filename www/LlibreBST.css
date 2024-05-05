@@ -1,0 +1,38 @@
+.definition {
+    background-color:yellow; 
+    margin-left:25px;
+    margin-right:25px;
+    padding:15px;
+}
+.note {
+    background-color:lightgrey;
+    margin-left:25px;
+    margin-right:25px;
+    padding:15px;
+}
+.example {
+    background-color:lightgreen;
+    margin-left:25px;
+    margin-right:25px;
+    padding:15px;
+}
+.exercise {
+    background-color:pink;
+    margin-left:25px;
+    margin-right:25px;
+    padding:15px;
+}
+.redline {
+  height: 1px;
+  background-color: black;
+}
+h1 {
+  background-color: black;
+  font-size:18px;
+  color:white;
+  padding:10px;
+}
+h2 {
+  font-size:16px;
+  color:red;
+}
